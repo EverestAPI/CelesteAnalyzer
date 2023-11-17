@@ -18,6 +18,7 @@
     <resheader name="writer">
         <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
     </resheader>
+    
     <data name="CL0001Title" xml:space="preserve">
         <value>Lambda passed to ILCursor.EmitDelegate</value>
     </data>
@@ -37,9 +38,6 @@
     <data name="CL0002MessageFormat" xml:space="preserve">
         <value>Avoid passing instance methods to ILCursor.EmitDelegate, as it can result in capturing an instance of your class in unexpected ways</value>
     </data>
-    <data name="CL0002Title" xml:space="preserve">
-        <value>Instance method passed to EmitDelegate</value>
-    </data>
     
     <data name="CL0003Title" xml:space="preserve">
         <value>Orig not called in hook</value>
@@ -50,9 +48,6 @@
     <data name="CL0003MessageFormat" xml:space="preserve">
         <value>At least one code path should call 'orig' in hooks, to allow other hooks to run properly</value>
     </data>
-    <data name="CL0003Title" xml:space="preserve">
-        <value>Orig not called in hook</value>
-    </data>
 
     <data name="CL0004Title" xml:space="preserve">
         <value>Non-static Hook</value>
@@ -62,9 +57,6 @@
     </data>
     <data name="CL0004MessageFormat" xml:space="preserve">
         <value>Hooks should be static, otherwise it can result in capturing an instance of your class in unexpected ways</value>
-    </data>
-    <data name="CL0004Title" xml:space="preserve">
-        <value>Non-static Hook</value>
     </data>
     <data name="CL0004CodeFixTitle" xml:space="preserve">
         <value>Make method static</value>
