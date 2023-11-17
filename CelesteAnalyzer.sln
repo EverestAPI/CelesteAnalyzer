@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CelesteAnalyzer", "CelesteAnalyzer\CelesteAnalyzer\CelesteAnalyzer.csproj", "{62492539-3248-4A8B-BD81-5BBAA014226B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CelesteAnalyzer.Sample", "CelesteAnalyzer\CelesteAnalyzer.Sample\CelesteAnalyzer.Sample.csproj", "{50ECBF4E-E86E-41FF-AF5A-EEAAD23038E0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{62492539-3248-4A8B-BD81-5BBAA014226B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62492539-3248-4A8B-BD81-5BBAA014226B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62492539-3248-4A8B-BD81-5BBAA014226B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62492539-3248-4A8B-BD81-5BBAA014226B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50ECBF4E-E86E-41FF-AF5A-EEAAD23038E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50ECBF4E-E86E-41FF-AF5A-EEAAD23038E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50ECBF4E-E86E-41FF-AF5A-EEAAD23038E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50ECBF4E-E86E-41FF-AF5A-EEAAD23038E0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
