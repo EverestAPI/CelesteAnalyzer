@@ -18,6 +18,12 @@
         <IncludeSymbols>true</IncludeSymbols>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
         <PackageReadmeFile>Readme.md</PackageReadmeFile>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <Description>A Roslyn analyzer for Celeste mods, helping you avoid common mistakes.</Description>
+        <PackageProjectUrl>https://github.com/JaThePlayer/CelesteAnalyzer</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/JaThePlayer/CelesteAnalyzer</RepositoryUrl>
+        <Authors>JaThePlayer</Authors>
+        <PackageTags>celeste CodeAnalysis mod game</PackageTags>
     </PropertyGroup>
     <ItemGroup>
         <None Include="Readme.md" Pack="true" PackagePath="\"/>
