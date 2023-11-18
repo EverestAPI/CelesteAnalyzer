@@ -14,58 +14,30 @@ public class EntityAnalyzer : DiagnosticAnalyzer
 {
     private const string Category = "Usage";
 
-    private static readonly DiagnosticDescriptor CustomEntityWithNoValidCtorRule = new(
-        DiagnosticIds.CustomEntityWithNoValidCtor, 
-        title: new LocalizableResourceString(nameof(Resources.CL0007Title), Resources.ResourceManager, typeof(Resources)), 
-        messageFormat: new LocalizableResourceString(nameof(Resources.CL0007MessageFormat), Resources.ResourceManager,typeof(Resources)), 
-        Category, DiagnosticSeverity.Warning, isEnabledByDefault: true, 
-        description: new LocalizableResourceString(nameof(Resources.CL0007Description), Resources.ResourceManager,typeof(Resources)));
+    private static readonly DiagnosticDescriptor CustomEntityWithNoValidCtorRule 
+        = Utils.CreateDiagnostic(DiagnosticIds.CustomEntityWithNoValidCtor);
     
-    private static readonly DiagnosticDescriptor CustomEntityNotExtendingEntityRule = new(
-        DiagnosticIds.CustomEntityNotExtendingEntity, 
-        title: new LocalizableResourceString(nameof(Resources.CL0008Title), Resources.ResourceManager, typeof(Resources)), 
-        messageFormat: new LocalizableResourceString(nameof(Resources.CL0008MessageFormat), Resources.ResourceManager,typeof(Resources)), 
-        Category, DiagnosticSeverity.Warning, isEnabledByDefault: true, 
-        description: new LocalizableResourceString(nameof(Resources.CL0008Description), Resources.ResourceManager,typeof(Resources)));
+    private static readonly DiagnosticDescriptor CustomEntityNotExtendingEntityRule 
+        = Utils.CreateDiagnostic(DiagnosticIds.CustomEntityNotExtendingEntity);
+
+    private static readonly DiagnosticDescriptor CustomEntityGeneratorMethodMissingRule
+        = Utils.CreateDiagnostic(DiagnosticIds.CustomEntityGeneratorMethodMissing);
     
-    private static readonly DiagnosticDescriptor CustomEntityGeneratorMethodMissingRule = new(
-        DiagnosticIds.CustomEntityGeneratorMethodMissing, 
-        title: new LocalizableResourceString(nameof(Resources.CL0009Title), Resources.ResourceManager, typeof(Resources)), 
-        messageFormat: new LocalizableResourceString(nameof(Resources.CL0009MessageFormat), Resources.ResourceManager,typeof(Resources)), 
-        Category, DiagnosticSeverity.Warning, isEnabledByDefault: true, 
-        description: new LocalizableResourceString(nameof(Resources.CL0009Description), Resources.ResourceManager,typeof(Resources)));
+    private static readonly DiagnosticDescriptor CustomEntityGeneratorInvalidParamsRule
+        = Utils.CreateDiagnostic(DiagnosticIds.CustomEntityGeneratorInvalidParams);
     
-    private static readonly DiagnosticDescriptor CustomEntityGeneratorInvalidParamsRule = new(
-        DiagnosticIds.CustomEntityGeneratorInvalidParams, 
-        title: new LocalizableResourceString(nameof(Resources.CL0010Title), Resources.ResourceManager, typeof(Resources)), 
-        messageFormat: new LocalizableResourceString(nameof(Resources.CL0010MessageFormat), Resources.ResourceManager,typeof(Resources)), 
-        Category, DiagnosticSeverity.Warning, isEnabledByDefault: true, 
-        description: new LocalizableResourceString(nameof(Resources.CL0010Description), Resources.ResourceManager,typeof(Resources)));
+    private static readonly DiagnosticDescriptor CustomEntityGeneratorInvalidRule
+        = Utils.CreateDiagnostic(DiagnosticIds.CustomEntityGeneratorInvalid);
     
-    private static readonly DiagnosticDescriptor CustomEntityGeneratorInvalidRule = new(
-        DiagnosticIds.CustomEntityGeneratorInvalid, 
-        title: new LocalizableResourceString(nameof(Resources.CL0011Title), Resources.ResourceManager, typeof(Resources)), 
-        messageFormat: new LocalizableResourceString(nameof(Resources.CL0011MessageFormat), Resources.ResourceManager,typeof(Resources)), 
-        Category, DiagnosticSeverity.Warning, isEnabledByDefault: true, 
-        description: new LocalizableResourceString(nameof(Resources.CL0011Description), Resources.ResourceManager,typeof(Resources)));
+    private static readonly DiagnosticDescriptor CustomEntityNoIDsRule
+        = Utils.CreateDiagnostic(DiagnosticIds.CustomEntityNoIDs);
     
-    private static readonly DiagnosticDescriptor CustomEntitNoIDsRule = new(
-        DiagnosticIds.CustomEntityNoIDs, 
-        title: new LocalizableResourceString(nameof(Resources.CL0012Title), Resources.ResourceManager, typeof(Resources)), 
-        messageFormat: new LocalizableResourceString(nameof(Resources.CL0012MessageFormat), Resources.ResourceManager,typeof(Resources)), 
-        Category, DiagnosticSeverity.Warning, isEnabledByDefault: true, 
-        description: new LocalizableResourceString(nameof(Resources.CL0012Description), Resources.ResourceManager,typeof(Resources)));
-    
-    private static readonly DiagnosticDescriptor UsingSceneInWrongPlaceRule = new(
-        DiagnosticIds.UsingSceneInWrongPlace, 
-        title: new LocalizableResourceString(nameof(Resources.CL0013Title), Resources.ResourceManager, typeof(Resources)), 
-        messageFormat: new LocalizableResourceString(nameof(Resources.CL0013MessageFormat), Resources.ResourceManager,typeof(Resources)), 
-        Category, DiagnosticSeverity.Warning, isEnabledByDefault: true, 
-        description: new LocalizableResourceString(nameof(Resources.CL0013Description), Resources.ResourceManager,typeof(Resources)));
+    private static readonly DiagnosticDescriptor UsingSceneInWrongPlaceRule
+        = Utils.CreateDiagnostic(DiagnosticIds.UsingSceneInWrongPlace);
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(
         CustomEntityWithNoValidCtorRule, CustomEntityNotExtendingEntityRule, CustomEntityGeneratorMethodMissingRule, 
-        CustomEntityGeneratorInvalidParamsRule, CustomEntityGeneratorInvalidRule, CustomEntitNoIDsRule,
+        CustomEntityGeneratorInvalidParamsRule, CustomEntityGeneratorInvalidRule, CustomEntityNoIDsRule,
         UsingSceneInWrongPlaceRule
         );
     
@@ -129,7 +101,7 @@ public class EntityAnalyzer : DiagnosticAnalyzer
             var customEntityAttrSyntax = syntax.Value.AttributeLists
                 .SelectMany(a => a.Attributes)
                 .FirstOrDefault(a => a.Name.ToString() is "CustomEntity");
-            ctx.ReportDiagnostic(Diagnostic.Create(CustomEntitNoIDsRule, customEntityAttrSyntax?.GetLocation()));
+            ctx.ReportDiagnostic(Diagnostic.Create(CustomEntityNoIDsRule, customEntityAttrSyntax?.GetLocation()));
         }
         
         var members = namedTypeSymbol.GetMembers();

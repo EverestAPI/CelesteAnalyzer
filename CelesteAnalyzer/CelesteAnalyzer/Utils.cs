@@ -57,4 +57,14 @@ public static class Utils
 
         return false;
     }
+
+    public static LocalizableResourceString Localize(this string toLocalize)
+        => new(toLocalize, Resources.ResourceManager, typeof(Resources));
+    
+    public static DiagnosticDescriptor CreateDiagnostic(string id, string category = "Usage", DiagnosticSeverity severity = DiagnosticSeverity.Warning) => new(
+        id,
+        title: $"{id}Title".Localize(),
+        messageFormat: $"{id}MessageFormat".Localize(),
+        category, severity, isEnabledByDefault: true, 
+        description: $"{id}Description".Localize());
 }

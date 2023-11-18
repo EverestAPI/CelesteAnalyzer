@@ -16,21 +16,11 @@ public class HookAnalyzer : DiagnosticAnalyzer
 {
     private const string Category = "Usage";
 
-    private static readonly DiagnosticDescriptor CallOrigInHooksRule = new(
-        DiagnosticIds.CallOrigInHooksDiagnosticId,
-        title: new LocalizableResourceString(nameof(Resources.CL0003Title),
-            Resources.ResourceManager, typeof(Resources)), 
-        messageFormat: new LocalizableResourceString(nameof(Resources.CL0003MessageFormat), Resources.ResourceManager,typeof(Resources)), 
-        Category, DiagnosticSeverity.Warning, isEnabledByDefault: true, 
-        description: new LocalizableResourceString(nameof(Resources.CL0003Description), Resources.ResourceManager,typeof(Resources)));
+    private static readonly DiagnosticDescriptor CallOrigInHooksRule
+        = Utils.CreateDiagnostic(DiagnosticIds.CallOrigInHooks);
     
-    private static readonly DiagnosticDescriptor HooksShouldBeStaticRule = new(
-        DiagnosticIds.HooksShouldBeStaticDiagnosticId,
-        title: new LocalizableResourceString(nameof(Resources.CL0004Title),
-            Resources.ResourceManager, typeof(Resources)), 
-        messageFormat: new LocalizableResourceString(nameof(Resources.CL0004MessageFormat), Resources.ResourceManager,typeof(Resources)), 
-        Category, DiagnosticSeverity.Warning, isEnabledByDefault: true, 
-        description: new LocalizableResourceString(nameof(Resources.CL0004Description), Resources.ResourceManager,typeof(Resources)));
+    private static readonly DiagnosticDescriptor HooksShouldBeStaticRule
+        = Utils.CreateDiagnostic(DiagnosticIds.HooksShouldBeStatic);
     
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
         ImmutableArray.Create(CallOrigInHooksRule, HooksShouldBeStaticRule);

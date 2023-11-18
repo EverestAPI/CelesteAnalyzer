@@ -34,7 +34,6 @@ namespace CelesteAnalyzer.Sample
             using var detour = new Hook(() => HookTarget(420), Detour);
             using var detour2 = new Hook(() => HookTarget(420), static (Action<int> orig, int arg) =>
             {
-                orig(arg);
             });
             
             

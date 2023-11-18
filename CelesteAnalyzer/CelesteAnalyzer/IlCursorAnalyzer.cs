@@ -15,35 +15,17 @@ public class IlCursorAnalyzer : DiagnosticAnalyzer
 {
     private const string Category = "Usage";
 
-    private static readonly DiagnosticDescriptor DontUseLambdasRule = new(
-        DiagnosticIds.DontUseLambdasDiagnosticId, 
-        title: new LocalizableResourceString(nameof(Resources.CL0001Title),
-            Resources.ResourceManager, typeof(Resources)), 
-        messageFormat: new LocalizableResourceString(nameof(Resources.CL0001MessageFormat), Resources.ResourceManager,typeof(Resources)), 
-        Category, DiagnosticSeverity.Warning, isEnabledByDefault: true, 
-        description: new LocalizableResourceString(nameof(Resources.CL0001Description), Resources.ResourceManager,typeof(Resources)));
+    private static readonly DiagnosticDescriptor DontUseLambdasRule
+        = Utils.CreateDiagnostic(DiagnosticIds.DontUseLambdas);
     
-    private static readonly DiagnosticDescriptor DontEmitInstanceMethodsRule = new(
-        DiagnosticIds.DontEmitInstanceMethodsDiagnosticId,
-        title: new LocalizableResourceString(nameof(Resources.CL0002Title),
-            Resources.ResourceManager, typeof(Resources)), 
-        messageFormat: new LocalizableResourceString(nameof(Resources.CL0002MessageFormat), Resources.ResourceManager,typeof(Resources)), 
-        Category, DiagnosticSeverity.Warning, isEnabledByDefault: true, 
-        description: new LocalizableResourceString(nameof(Resources.CL0002Description), Resources.ResourceManager,typeof(Resources)));
+    private static readonly DiagnosticDescriptor DontEmitInstanceMethodsRule
+        = Utils.CreateDiagnostic(DiagnosticIds.DontEmitInstanceMethods);
     
-    private static readonly DiagnosticDescriptor DontUseCursorRemoveRule = new(
-        DiagnosticIds.DontUseCursorRemove,
-        title: new LocalizableResourceString(nameof(Resources.CL0005Title), Resources.ResourceManager, typeof(Resources)), 
-        messageFormat: new LocalizableResourceString(nameof(Resources.CL0005MessageFormat), Resources.ResourceManager,typeof(Resources)), 
-        Category, DiagnosticSeverity.Warning, isEnabledByDefault: true, 
-        description: new LocalizableResourceString(nameof(Resources.CL0005Description), Resources.ResourceManager,typeof(Resources)));
+    private static readonly DiagnosticDescriptor DontUseCursorRemoveRule
+        = Utils.CreateDiagnostic(DiagnosticIds.DontUseCursorRemove);
     
-    private static readonly DiagnosticDescriptor DontChainPredicatesInCursorGotoRule = new(
-        DiagnosticIds.DontChainPredicatesInCursorGoto,
-        title: new LocalizableResourceString(nameof(Resources.CL0006Title), Resources.ResourceManager, typeof(Resources)), 
-        messageFormat: new LocalizableResourceString(nameof(Resources.CL0006MessageFormat), Resources.ResourceManager,typeof(Resources)), 
-        Category, DiagnosticSeverity.Warning, isEnabledByDefault: true, 
-        description: new LocalizableResourceString(nameof(Resources.CL0006Description), Resources.ResourceManager,typeof(Resources)));
+    private static readonly DiagnosticDescriptor DontChainPredicatesInCursorGotoRule
+        = Utils.CreateDiagnostic(DiagnosticIds.DontChainPredicatesInCursorGoto);
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
         ImmutableArray.Create(DontUseLambdasRule, DontEmitInstanceMethodsRule, DontUseCursorRemoveRule, DontChainPredicatesInCursorGotoRule);

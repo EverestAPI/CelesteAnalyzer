@@ -2,10 +2,10 @@
 
 public static class DiagnosticIds
 {
-    internal const string DontUseLambdasDiagnosticId = "CL0001";
-    internal const string DontEmitInstanceMethodsDiagnosticId = "CL0002";
-    internal const string CallOrigInHooksDiagnosticId = "CL0003";
-    internal const string HooksShouldBeStaticDiagnosticId = "CL0004";
+    internal const string DontUseLambdas = "CL0001";
+    internal const string DontEmitInstanceMethods = "CL0002";
+    internal const string CallOrigInHooks = "CL0003";
+    internal const string HooksShouldBeStatic = "CL0004";
     internal const string DontUseCursorRemove = "CL0005";
     internal const string DontChainPredicatesInCursorGoto = "CL0006";
     internal const string CustomEntityWithNoValidCtor = "CL0007";

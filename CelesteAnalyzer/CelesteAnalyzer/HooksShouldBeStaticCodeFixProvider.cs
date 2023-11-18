@@ -19,7 +19,7 @@ public class HooksShouldBeStaticCodeFixProvider : CodeFixProvider
     private const string CommonName = "Common";
 
     public sealed override ImmutableArray<string> FixableDiagnosticIds { get; } =
-        ImmutableArray.Create(DiagnosticIds.HooksShouldBeStaticDiagnosticId);
+        ImmutableArray.Create(DiagnosticIds.HooksShouldBeStatic);
 
     public override FixAllProvider? GetFixAllProvider() => null;
 
