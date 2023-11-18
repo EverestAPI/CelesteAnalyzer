@@ -2,7 +2,7 @@
 
 A Roslyn analyzer which helps you avoid common mistakes made when developing Celeste mods.
 
-## Features
+## Warnings
 
 ### CL0001: Lambda passed to ILCursor.EmitDelegate
 Passing lambdas to `ILCursor.EmitDelegate`, like this:
@@ -38,3 +38,15 @@ Warns about not calling the `orig` method received as the 1st parameter to a On.
 ### CL0004: Hooks should be static
 Warns about non-static methods used as targets for `On` hooks or manipulators for `IL` hooks.
 Provides a code fixer to make them static.
+
+### CL0005: ILCursor.Remove or RemoveRange used
+Don't call ILCursor.Remove or RemoveRange, as it can break other IL hooks which search for the removed instructions
+
+### CL0006: Multiple predicates to ILCursor.(Try)Goto*
+Avoid passing several predicates to ILCursor.(Try)Goto* methods, as other hooks might inject instructions between the target instructions. If possible, split them into separate calls instead.
+
+### CL0007 - CL0012
+Several warnings about invalid use of the `CustomEntity` attribute.
+
+### CL0013: Entity.Scene accessed in ctor
+Entity.Scene is always null in the constructor. Move any code that requires the Scene to Added (called before all entities are added to the scene) or Awake (called after all entities are added)

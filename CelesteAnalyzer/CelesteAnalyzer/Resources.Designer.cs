@@ -175,5 +175,257 @@ namespace CelesteAnalyzer {
                 return ResourceManager.GetString("CL0004Title", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ILCursor.Remove or RemoveRange should never be used..
+        /// </summary>
+        internal static string CL0005Description {
+            get {
+                return ResourceManager.GetString("CL0005Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Don&apos;t call ILCursor.Remove or RemoveRange, as it can break other IL hooks which search for the removed instructions.
+        /// </summary>
+        internal static string CL0005MessageFormat {
+            get {
+                return ResourceManager.GetString("CL0005MessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ILCursor.Remove or RemoveRange used.
+        /// </summary>
+        internal static string CL0005Title {
+            get {
+                return ResourceManager.GetString("CL0005Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Avoid passing multiple predicates to ILCursor.(Try)Goto*..
+        /// </summary>
+        internal static string CL0006Description {
+            get {
+                return ResourceManager.GetString("CL0006Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Avoid passing several predicates to ILCursor.(Try)Goto* methods, as other hooks might inject instructions between the target instructions. If possible, split them into separate calls instead..
+        /// </summary>
+        internal static string CL0006MessageFormat {
+            get {
+                return ResourceManager.GetString("CL0006MessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Multiple predicates to ILCursor.(Try)Goto*.
+        /// </summary>
+        internal static string CL0006Title {
+            get {
+                return ResourceManager.GetString("CL0006Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No valid ctor for Entity marked with the CustomEntity attribute..
+        /// </summary>
+        internal static string CL0007Description {
+            get {
+                return ResourceManager.GetString("CL0007Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Entities marked with the CustomEntity attribute must have one of the following constructors: 
+        ///            {0}(EntityData, Vector2 offset, EntityID),
+        ///            {0}(EntityData, Vector2 offset),
+        ///            {0}(Vector2 offset),
+        ///            {0}().
+        /// </summary>
+        internal static string CL0007MessageFormat {
+            get {
+                return ResourceManager.GetString("CL0007MessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No valid ctor for CustomEntity.
+        /// </summary>
+        internal static string CL0007Title {
+            get {
+                return ResourceManager.GetString("CL0007Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Class marked by CustomEntity doesn&apos;t extend Entity..
+        /// </summary>
+        internal static string CL0008Description {
+            get {
+                return ResourceManager.GetString("CL0008Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Classes marked with the CustomEntity attribute must extend from Entity.
+        /// </summary>
+        internal static string CL0008MessageFormat {
+            get {
+                return ResourceManager.GetString("CL0008MessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Class marked by CustomEntity doesn&apos;t extend Entity.
+        /// </summary>
+        internal static string CL0008Title {
+            get {
+                return ResourceManager.GetString("CL0008Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CustomEntity Generator method missing..
+        /// </summary>
+        internal static string CL0009Description {
+            get {
+                return ResourceManager.GetString("CL0009Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The CustomEntity attribute specifies a generator method &apos;{0}&apos;, but it is missing from the class.
+        /// </summary>
+        internal static string CL0009MessageFormat {
+            get {
+                return ResourceManager.GetString("CL0009MessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CustomEntity generator method missing.
+        /// </summary>
+        internal static string CL0009Title {
+            get {
+                return ResourceManager.GetString("CL0009Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CustomEntity generator method has invalid parameters..
+        /// </summary>
+        internal static string CL0010Description {
+            get {
+                return ResourceManager.GetString("CL0010Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid parameters for CustomEntity generator method. They must be one of the following:
+        ///            {0}(Level, LevelData, EntityData, Vector2 offset, EntityID),
+        ///            {0}(EntityData, Vector2 offset, EntityID),
+        ///            {0}(EntityData, Vector2 offset),
+        ///            {0}(Vector2 offset),
+        ///            {0}().
+        /// </summary>
+        internal static string CL0010MessageFormat {
+            get {
+                return ResourceManager.GetString("CL0010MessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CustomEntity generator method parameters invalid.
+        /// </summary>
+        internal static string CL0010Title {
+            get {
+                return ResourceManager.GetString("CL0010Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CustomEntity generator method is invalid..
+        /// </summary>
+        internal static string CL0011Description {
+            get {
+                return ResourceManager.GetString("CL0011Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CustomEntity generator methods must be static, and return Entity or a type extending Entity.
+        /// </summary>
+        internal static string CL0011MessageFormat {
+            get {
+                return ResourceManager.GetString("CL0011MessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CustomEntity generator method invalid.
+        /// </summary>
+        internal static string CL0011Title {
+            get {
+                return ResourceManager.GetString("CL0011Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CustomEntity with no IDs..
+        /// </summary>
+        internal static string CL0012Description {
+            get {
+                return ResourceManager.GetString("CL0012Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CustomEntity attributes need at least one IDs passed as an argument to function properly.
+        /// </summary>
+        internal static string CL0012MessageFormat {
+            get {
+                return ResourceManager.GetString("CL0012MessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CustomEntity with no IDs.
+        /// </summary>
+        internal static string CL0012Title {
+            get {
+                return ResourceManager.GetString("CL0012Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Entity.Scene accessed in ctor..
+        /// </summary>
+        internal static string CL0013Description {
+            get {
+                return ResourceManager.GetString("CL0013Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Entity.Scene is always null in the constructor. Move any code that requires the Scene to Added (called before all entities are added to the scene) or Awake (called after all entities are added).
+        /// </summary>
+        internal static string CL0013MessageFormat {
+            get {
+                return ResourceManager.GetString("CL0013MessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Entity.Scene accessed in ctor.
+        /// </summary>
+        internal static string CL0013Title {
+            get {
+                return ResourceManager.GetString("CL0013Title", resourceCulture);
+            }
+        }
     }
 }

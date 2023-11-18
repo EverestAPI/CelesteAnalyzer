@@ -1,4 +1,5 @@
-﻿using System.Collections.Immutable;
+﻿using System;
+using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -8,18 +9,15 @@ using Microsoft.CodeAnalysis.Operations;
 namespace CelesteAnalyzer;
 
 /// <summary>
-/// Analyzer that checks for hooks which do not call the 'orig' method
+/// Analyzer that checks for dangerous hooks
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public class HookAnalyzer : DiagnosticAnalyzer
 {
-    internal const string CallOrigInHooksDiagnosticId = "CL0003";
-    internal const string HooksShouldBeStaticDiagnosticId = "CL0004";
-    
     private const string Category = "Usage";
 
     private static readonly DiagnosticDescriptor CallOrigInHooksRule = new(
-        CallOrigInHooksDiagnosticId,
+        DiagnosticIds.CallOrigInHooksDiagnosticId,
         title: new LocalizableResourceString(nameof(Resources.CL0003Title),
             Resources.ResourceManager, typeof(Resources)), 
         messageFormat: new LocalizableResourceString(nameof(Resources.CL0003MessageFormat), Resources.ResourceManager,typeof(Resources)), 
@@ -27,7 +25,7 @@ public class HookAnalyzer : DiagnosticAnalyzer
         description: new LocalizableResourceString(nameof(Resources.CL0003Description), Resources.ResourceManager,typeof(Resources)));
     
     private static readonly DiagnosticDescriptor HooksShouldBeStaticRule = new(
-        HooksShouldBeStaticDiagnosticId,
+        DiagnosticIds.HooksShouldBeStaticDiagnosticId,
         title: new LocalizableResourceString(nameof(Resources.CL0004Title),
             Resources.ResourceManager, typeof(Resources)), 
         messageFormat: new LocalizableResourceString(nameof(Resources.CL0004MessageFormat), Resources.ResourceManager,typeof(Resources)), 
@@ -108,12 +106,12 @@ public class HookAnalyzer : DiagnosticAnalyzer
                     .OfType<LambdaExpressionSyntax>()
                     .FirstOrDefault() is { } syntax)
             {
-                AnalyzeHook(context, methodRef.Symbol, syntax.Block, syntax.GetLocation());
+                AnalyzeHook(context, methodRef.Symbol, (SyntaxNode?)syntax.Block ?? syntax.ExpressionBody, syntax.GetLocation());
             }
         }
     }
 
-    private static void AnalyzeHook(OperationAnalysisContext context, IMethodSymbol methodSymbol, BlockSyntax? bodySyntax, Location loc)
+    private static void AnalyzeHook(OperationAnalysisContext context, IMethodSymbol methodSymbol, SyntaxNode? bodySyntax, Location loc)
     {
         var firstParam = methodSymbol.Parameters.First();
         
@@ -129,11 +127,11 @@ public class HookAnalyzer : DiagnosticAnalyzer
             return;
         
         // hooks should call orig in at least one code path
-        if (bodySyntax is { } body)
+        if (bodySyntax is not null)
         {
-            foreach (var st in body.Statements)
+            foreach (var st in bodySyntax.DescendantNodes())
             {
-                if (st is ExpressionStatementSyntax { Expression: InvocationExpressionSyntax invocationExpressionSyntax } &&
+                if (st is InvocationExpressionSyntax invocationExpressionSyntax &&
                     invocationExpressionSyntax.Expression.ToString() == firstParam.Name)
                 {
                     return;
@@ -142,6 +140,6 @@ public class HookAnalyzer : DiagnosticAnalyzer
 
             var diagnostic = Diagnostic.Create(CallOrigInHooksRule, loc, firstParam.Type.Name);
             context.ReportDiagnostic(diagnostic);
-        } 
+        }
     }
 }

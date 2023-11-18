@@ -41,4 +41,20 @@ public static class Utils
         methodReference = null!;
         return null;
     }
+
+    /// <summary>
+    /// Checks whether the type extends a class named <paramref name="className"/>, recursively.
+    /// </summary>
+    public static bool Extends(ITypeSymbol type, string className)
+    {
+        var t = type;
+        while (t is not null)
+        {
+            if (t.Name == className)
+                return true;
+            t = t.BaseType;
+        }
+
+        return false;
+    }
 }

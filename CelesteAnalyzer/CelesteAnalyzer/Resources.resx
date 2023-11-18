@@ -61,4 +61,103 @@
     <data name="CL0004CodeFixTitle" xml:space="preserve">
         <value>Make method static</value>
     </data>
+
+    <data name="CL0005Title" xml:space="preserve">
+        <value>ILCursor.Remove or RemoveRange used</value>
+    </data>
+    <data name="CL0005Description" xml:space="preserve">
+        <value>ILCursor.Remove or RemoveRange should never be used.</value>
+    </data>
+    <data name="CL0005MessageFormat" xml:space="preserve">
+        <value>Don't call ILCursor.Remove or RemoveRange, as it can break other IL hooks which search for the removed instructions</value>
+    </data>
+
+    <data name="CL0006Title" xml:space="preserve">
+        <value>Multiple predicates to ILCursor.(Try)Goto*</value>
+    </data>
+    <data name="CL0006Description" xml:space="preserve">
+        <value>Avoid passing multiple predicates to ILCursor.(Try)Goto*.</value>
+    </data>
+    <data name="CL0006MessageFormat" xml:space="preserve">
+        <value>Avoid passing several predicates to ILCursor.(Try)Goto* methods, as other hooks might inject instructions between the target instructions. If possible, split them into separate calls instead.</value>
+    </data>
+
+    <data name="CL0007Title" xml:space="preserve">
+        <value>No valid ctor for CustomEntity</value>
+    </data>
+    <data name="CL0007Description" xml:space="preserve">
+        <value>No valid ctor for Entity marked with the CustomEntity attribute.</value>
+    </data>
+    <data name="CL0007MessageFormat" xml:space="preserve">
+        <value>Entities marked with the CustomEntity attribute must have one of the following constructors: 
+            {0}(EntityData, Vector2 offset, EntityID),
+            {0}(EntityData, Vector2 offset),
+            {0}(Vector2 offset),
+            {0}()</value>
+    </data>
+
+    <data name="CL0008Title" xml:space="preserve">
+        <value>Class marked by CustomEntity doesn't extend Entity</value>
+    </data>
+    <data name="CL0008Description" xml:space="preserve">
+        <value>Class marked by CustomEntity doesn't extend Entity.</value>
+    </data>
+    <data name="CL0008MessageFormat" xml:space="preserve">
+        <value>Classes marked with the CustomEntity attribute must extend from Entity</value>
+    </data>
+
+    <data name="CL0009Title" xml:space="preserve">
+        <value>CustomEntity generator method missing</value>
+    </data>
+    <data name="CL0009Description" xml:space="preserve">
+        <value>CustomEntity Generator method missing.</value>
+    </data>
+    <data name="CL0009MessageFormat" xml:space="preserve">
+        <value>The CustomEntity attribute specifies a generator method '{0}', but it is missing from the class</value>
+    </data>
+
+    <data name="CL0010Title" xml:space="preserve">
+        <value>CustomEntity generator method parameters invalid</value>
+    </data>
+    <data name="CL0010Description" xml:space="preserve">
+        <value>CustomEntity generator method has invalid parameters.</value>
+    </data>
+    <data name="CL0010MessageFormat" xml:space="preserve">
+        <value>Invalid parameters for CustomEntity generator method. They must be one of the following:
+            {0}(Level, LevelData, EntityData, Vector2 offset, EntityID),
+            {0}(EntityData, Vector2 offset, EntityID),
+            {0}(EntityData, Vector2 offset),
+            {0}(Vector2 offset),
+            {0}()</value>
+    </data>
+
+    <data name="CL0011Title" xml:space="preserve">
+        <value>CustomEntity generator method invalid</value>
+    </data>
+    <data name="CL0011Description" xml:space="preserve">
+        <value>CustomEntity generator method is invalid.</value>
+    </data>
+    <data name="CL0011MessageFormat" xml:space="preserve">
+        <value>CustomEntity generator methods must be static, and return Entity or a type extending Entity</value>
+    </data>
+
+    <data name="CL0012Title" xml:space="preserve">
+        <value>CustomEntity with no IDs</value>
+    </data>
+    <data name="CL0012Description" xml:space="preserve">
+        <value>CustomEntity with no IDs.</value>
+    </data>
+    <data name="CL0012MessageFormat" xml:space="preserve">
+        <value>CustomEntity attributes need at least one IDs passed as an argument to function properly</value>
+    </data>
+
+    <data name="CL0013Title" xml:space="preserve">
+        <value>Entity.Scene accessed in ctor</value>
+    </data>
+    <data name="CL0013Description" xml:space="preserve">
+        <value>Entity.Scene accessed in ctor.</value>
+    </data>
+    <data name="CL0013MessageFormat" xml:space="preserve">
+        <value>Entity.Scene is always null in the constructor. Move any code that requires the Scene to Added (called before all entities are added to the scene) or Awake (called after all entities are added)</value>
+    </data>
 </root>

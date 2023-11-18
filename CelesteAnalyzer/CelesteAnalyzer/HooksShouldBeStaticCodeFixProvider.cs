@@ -19,7 +19,7 @@ public class HooksShouldBeStaticCodeFixProvider : CodeFixProvider
     private const string CommonName = "Common";
 
     public sealed override ImmutableArray<string> FixableDiagnosticIds { get; } =
-        ImmutableArray.Create(HookAnalyzer.HooksShouldBeStaticDiagnosticId);
+        ImmutableArray.Create(DiagnosticIds.HooksShouldBeStaticDiagnosticId);
 
     public override FixAllProvider? GetFixAllProvider() => null;
 
@@ -78,7 +78,9 @@ public class HooksShouldBeStaticCodeFixProvider : CodeFixProvider
         var formattedLambda = newLambdaExpr.WithAdditionalAnnotations(Formatter.Annotation);
         
         // Replace the old local declaration with the new local declaration.
-        var oldRoot = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false)!;
+        var oldRoot = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+        if (oldRoot is null)
+            return document;
         var newRoot = oldRoot.ReplaceNode(decl, formattedLambda);
 
         // Return document with transformed tree.
@@ -99,7 +101,9 @@ public class HooksShouldBeStaticCodeFixProvider : CodeFixProvider
         var formattedLambda = newLambdaExpr.WithAdditionalAnnotations(Formatter.Annotation);
         
         // Replace the old local declaration with the new local declaration.
-        var oldRoot = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false)!;
+        var oldRoot = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+        if (oldRoot is null)
+            return document;
         var newRoot = oldRoot.ReplaceNode(lambdaExpression, formattedLambda);
 
         // Return document with transformed tree.
