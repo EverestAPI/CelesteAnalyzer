@@ -12,8 +12,6 @@ namespace CelesteAnalyzer;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public class EntityAnalyzer : DiagnosticAnalyzer
 {
-    private const string Category = "Usage";
-
     private static readonly DiagnosticDescriptor CustomEntityWithNoValidCtorRule 
         = Utils.CreateDiagnostic(DiagnosticIds.CustomEntityWithNoValidCtor);
     
@@ -98,9 +96,7 @@ public class EntityAnalyzer : DiagnosticAnalyzer
         var ids = customEntityAttr.ConstructorArguments.First().Values;
         if (ids.Length == 0)
         {
-            var customEntityAttrSyntax = syntax.Value.AttributeLists
-                .SelectMany(a => a.Attributes)
-                .FirstOrDefault(a => a.Name.ToString() is "CustomEntity");
+            var customEntityAttrSyntax = Utils.GetAttributeSyntaxFromClassDef(customEntityAttr, syntax.Value);
             ctx.ReportDiagnostic(Diagnostic.Create(CustomEntityNoIDsRule, customEntityAttrSyntax?.GetLocation()));
         }
         

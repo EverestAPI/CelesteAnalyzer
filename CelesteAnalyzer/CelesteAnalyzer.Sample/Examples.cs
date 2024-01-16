@@ -2,8 +2,10 @@
 // ReSharper disable UnusedMember.Global
 
 using System;
+using System.Collections;
 using System.Numerics;
 using System.Runtime.CompilerServices;
+using System.Text;
 using Celeste.Mod.Helpers;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
@@ -50,6 +52,8 @@ namespace CelesteAnalyzer.Sample
             {
                 return orig(arg, arg2);
             };
+            On.Celeste.Player.OnSomeRoutine += RoutineOnHook;
+            
             IL.Celeste.Player.NormalUpdate += static ctx =>
             {
                 var cursor = new ILCursor(ctx);
@@ -64,6 +68,18 @@ namespace CelesteAnalyzer.Sample
             HookTarget(4);
         }
 
+        private static IEnumerator RoutineOnHook(Func<IEnumerator> orig)
+        {
+            yield return new SwapImmediately(orig());
+
+            var origRoutine = orig();
+            while (origRoutine.MoveNext())
+                yield return origRoutine.Current;
+            
+            
+            yield return orig();
+        }
+        
         private int Cb(int arg)
         {
             return arg * 2;
@@ -92,6 +108,7 @@ namespace CelesteAnalyzer.Sample
     }
 
     [CustomEntity, Other]
+    [Tracked]
     class MyEntity : Entity
     {
         public MyEntity(Vector2 blah)
@@ -101,6 +118,15 @@ namespace CelesteAnalyzer.Sample
             cb = () =>
             {
                 Console.WriteLine(Scene);
+                // we don't have access to this class and it's not tracked, no warning here
+                new EntityList().FindAll<StringBuilder>();
+                new EntityList().FindAll<MyEntity>();
+
+                
+                
+                new Tracker().GetEntities<MyEntity>();
+                new Tracker().GetEntities<OtherEntity>();
+                new Tracker().GetEntities<MyTrigger>();
             };
         }
 
@@ -112,7 +138,14 @@ namespace CelesteAnalyzer.Sample
         private Action cb;
     }
 
+    [TrackedAs(typeof(MyEntity))]
+    class OtherEntity : Entity
+    {
+        
+    }
+
     [CustomEntity($"MyTrigger = {nameof(Generator)}")]
+    //[TrackedAs(typeof(Trigger))]
     class MyTrigger : Trigger
     {
         void Generator(int a)
@@ -133,6 +166,8 @@ namespace On.Celeste
     public class Player
     {
         public static event Func<Func<int, string, int>, int, string, int> OnNormalUpdate;
+        
+        public static event Func<Func<IEnumerator>, IEnumerator> OnSomeRoutine;
     }
 }
 
@@ -146,9 +181,23 @@ namespace IL.Celeste
 
 namespace Celeste.Mod.Helpers
 {
+    public record SwapImmediately(IEnumerator Enumerable);
+    
     public class CustomEntity : Attribute
     {
         public CustomEntity(params string[] ids)
+        {
+            
+        }
+    }
+    
+    public class Tracked : Attribute
+    {
+    }
+    
+    public class TrackedAs : Attribute
+    {
+        public TrackedAs(Type trackedAs)
         {
             
         }
@@ -167,6 +216,22 @@ namespace Celeste.Mod.Helpers
 
     public class Trigger : Entity
     {
+    }
+
+    public class EntityList
+    {
+        public System.Collections.Generic.List<T> FindAll<T>()
+        {
+            return new();
+        } 
+    }
+
+    public class Tracker
+    {
+        public System.Collections.Generic.List<Entity> GetEntities<T>() where T : Entity
+        {
+            return new();
+        }
     }
 }
 

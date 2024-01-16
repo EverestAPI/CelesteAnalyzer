@@ -13,8 +13,6 @@ namespace CelesteAnalyzer;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public class IlCursorAnalyzer : DiagnosticAnalyzer
 {
-    private const string Category = "Usage";
-
     private static readonly DiagnosticDescriptor DontUseLambdasRule
         = Utils.CreateDiagnostic(DiagnosticIds.DontUseLambdas);
     

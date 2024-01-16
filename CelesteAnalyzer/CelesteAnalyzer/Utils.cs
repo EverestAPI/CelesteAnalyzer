@@ -67,4 +67,30 @@ public static class Utils
         messageFormat: $"{id}MessageFormat".Localize(),
         category, severity, isEnabledByDefault: true, 
         description: $"{id}Description".Localize());
+
+    /// <summary>
+    /// Returns whether the source code for the given symbol is changeable, that is, belongs to the current compilation.
+    /// </summary>
+    public static bool IsSourceChangeable(ISymbol symbol, Compilation compilation)
+    {
+        return SymbolEqualityComparer.Default.Equals(symbol.ContainingAssembly, compilation.Assembly);
+    }
+
+    /// <summary>
+    /// Returns whether the given type is marked with the Tracked or TrackedAs attributes.
+    /// </summary>
+    public static bool IsTracked(ITypeSymbol type)
+    {
+        return type.GetAttributes().Any(x => x.AttributeClass?.Name is "Tracked" or "TrackedAs");
+    }
+
+    public static AttributeSyntax? GetAttributeSyntaxFromClassDef(AttributeData toFind, ClassDeclarationSyntax declarationSyntax)
+    {
+        if (toFind.AttributeClass is null)
+            return null;
+        
+        return declarationSyntax.AttributeLists
+            .SelectMany(a => a.Attributes)
+            .FirstOrDefault(a => a.Name.ToString() == toFind.AttributeClass.Name);
+    }
 }

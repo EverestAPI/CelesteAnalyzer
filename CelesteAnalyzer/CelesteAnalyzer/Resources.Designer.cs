@@ -427,5 +427,113 @@ namespace CelesteAnalyzer {
                 return ResourceManager.GetString("CL0013Title", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use the Tracker if possible..
+        /// </summary>
+        internal static string CL0014Description {
+            get {
+                return ResourceManager.GetString("CL0014Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Instead of EntityList.Find(All), use Scene.Tracker with types marked with the [Tracked] attribute for much better performance. EntityList.Find(All) loops through all entities in the scene, the Tracker is a Dictionary lookup..
+        /// </summary>
+        internal static string CL0014MessageFormat {
+            get {
+                return ResourceManager.GetString("CL0014MessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use Tracker if possible.
+        /// </summary>
+        internal static string CL0014Title {
+            get {
+                return ResourceManager.GetString("CL0014Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tracker used on untracked type..
+        /// </summary>
+        internal static string CL0015Description {
+            get {
+                return ResourceManager.GetString("CL0015Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trying to call Tracker methods on types not marked with [Tracked] or [TrackedAs] will fail at runtime. Add the [Tracked] or [TrackedAs] attribute to {0} if possible..
+        /// </summary>
+        internal static string CL0015MessageFormat {
+            get {
+                return ResourceManager.GetString("CL0015MessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tracker used on untracked type.
+        /// </summary>
+        internal static string CL0015Title {
+            get {
+                return ResourceManager.GetString("CL0015Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid TrackedAs usage..
+        /// </summary>
+        internal static string CL0016Description {
+            get {
+                return ResourceManager.GetString("CL0016Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Using [TrackedAs(typeof({0}))] when your class does not extend {0} can fail at runtime, due to code outside your control expecting Tracker methods to only return types extending {0}..
+        /// </summary>
+        internal static string CL0016MessageFormat {
+            get {
+                return ResourceManager.GetString("CL0016MessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid TrackedAs usage.
+        /// </summary>
+        internal static string CL0016Title {
+            get {
+                return ResourceManager.GetString("CL0016Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Avoid yield return orig(...)..
+        /// </summary>
+        internal static string CL0017Description {
+            get {
+                return ResourceManager.GetString("CL0017Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Avoid using `yield return orig(...)`, as it introduces a 1-frame delay. Use `yield return new SwapImmediately(orig(...))`, or, if this method is used by a StateMachine, enumerate the enumerator manually and yield return all of its elements in a loop..
+        /// </summary>
+        internal static string CL0017MessageFormat {
+            get {
+                return ResourceManager.GetString("CL0017MessageFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Avoid yield return orig(...).
+        /// </summary>
+        internal static string CL0017Title {
+            get {
+                return ResourceManager.GetString("CL0017Title", resourceCulture);
+            }
+        }
     }
 }

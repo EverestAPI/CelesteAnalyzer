@@ -160,4 +160,44 @@
     <data name="CL0013MessageFormat" xml:space="preserve">
         <value>Entity.Scene is always null in the constructor. Move any code that requires the Scene to Added (called before all entities are added to the scene) or Awake (called after all entities are added)</value>
     </data>
+
+    <data name="CL0014Title" xml:space="preserve">
+        <value>Use Tracker if possible</value>
+    </data>
+    <data name="CL0014Description" xml:space="preserve">
+        <value>Use the Tracker if possible.</value>
+    </data>
+    <data name="CL0014MessageFormat" xml:space="preserve">
+        <value>Instead of EntityList.Find(All), use Scene.Tracker with types marked with the [Tracked] attribute for much better performance. EntityList.Find(All) loops through all entities in the scene, the Tracker is a Dictionary lookup.</value>
+    </data>
+
+    <data name="CL0015Title" xml:space="preserve">
+        <value>Tracker used on untracked type</value>
+    </data>
+    <data name="CL0015Description" xml:space="preserve">
+        <value>Tracker used on untracked type.</value>
+    </data>
+    <data name="CL0015MessageFormat" xml:space="preserve">
+        <value>Trying to call Tracker methods on types not marked with [Tracked] or [TrackedAs] will fail at runtime. Add the [Tracked] or [TrackedAs] attribute to {0} if possible.</value>
+    </data>
+
+    <data name="CL0016Title" xml:space="preserve">
+        <value>Invalid TrackedAs usage</value>
+    </data>
+    <data name="CL0016Description" xml:space="preserve">
+        <value>Invalid TrackedAs usage.</value>
+    </data>
+    <data name="CL0016MessageFormat" xml:space="preserve">
+        <value>Using [TrackedAs(typeof({0}))] when your class does not extend {0} can fail at runtime, due to code outside your control expecting Tracker methods to only return types extending {0}.</value>
+    </data>
+
+    <data name="CL0017Title" xml:space="preserve">
+        <value>Avoid yield return orig(...)</value>
+    </data>
+    <data name="CL0017Description" xml:space="preserve">
+        <value>Avoid yield return orig(...).</value>
+    </data>
+    <data name="CL0017MessageFormat" xml:space="preserve">
+        <value>Avoid using `yield return orig(...)`, as it introduces a 1-frame delay. Use `yield return new SwapImmediately(orig(...))`, or, if this method is used by a StateMachine, enumerate the enumerator manually and yield return all of its elements in a loop.</value>
+    </data>
 </root>

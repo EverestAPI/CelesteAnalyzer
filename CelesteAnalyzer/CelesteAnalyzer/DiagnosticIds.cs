@@ -15,4 +15,8 @@ public static class DiagnosticIds
     internal const string CustomEntityGeneratorInvalid = "CL0011";
     internal const string CustomEntityNoIDs = "CL0012";
     internal const string UsingSceneInWrongPlace = "CL0013";
+    internal const string DontUseFindAll = "CL0014";
+    internal const string TrackerUsedOnUntrackedType = "CL0015";
+    internal const string InvalidTrackedAs = "CL0016";
+    internal const string DontYieldReturnOrig = "CL0017";
 }

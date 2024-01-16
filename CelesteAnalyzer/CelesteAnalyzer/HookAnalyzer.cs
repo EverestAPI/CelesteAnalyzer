@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Immutable;
 using System.Linq;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Operations;
@@ -14,16 +16,17 @@ namespace CelesteAnalyzer;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public class HookAnalyzer : DiagnosticAnalyzer
 {
-    private const string Category = "Usage";
-
     private static readonly DiagnosticDescriptor CallOrigInHooksRule
         = Utils.CreateDiagnostic(DiagnosticIds.CallOrigInHooks);
     
     private static readonly DiagnosticDescriptor HooksShouldBeStaticRule
         = Utils.CreateDiagnostic(DiagnosticIds.HooksShouldBeStatic);
     
+    private static readonly DiagnosticDescriptor DontYieldReturnOrigRule
+        = Utils.CreateDiagnostic(DiagnosticIds.DontYieldReturnOrig);
+    
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
-        ImmutableArray.Create(CallOrigInHooksRule, HooksShouldBeStaticRule);
+        ImmutableArray.Create(CallOrigInHooksRule, HooksShouldBeStaticRule, DontYieldReturnOrigRule);
 
     public override void Initialize(AnalysisContext context)
     {
@@ -119,17 +122,44 @@ public class HookAnalyzer : DiagnosticAnalyzer
         // hooks should call orig in at least one code path
         if (bodySyntax is not null)
         {
+            bool origCalled = false;
+            bool isEnumeratorMethod = methodSymbol.ReturnType.Name == nameof(IEnumerator);
+            
             foreach (var st in bodySyntax.DescendantNodes())
             {
-                if (st is InvocationExpressionSyntax invocationExpressionSyntax &&
-                    invocationExpressionSyntax.Expression.ToString() == firstParam.Name)
+                if (IsOrig(st, firstParam))
                 {
-                    return;
+                    origCalled = true;
+                    
+                    // no point in checking the method any more if this isn't an enumerator
+                    if (!isEnumeratorMethod)
+                        return;
+                }
+
+                if (isEnumeratorMethod && st is YieldStatementSyntax yield)
+                {
+                    if (yield.ReturnOrBreakKeyword.IsKind(SyntaxKind.ReturnKeyword))
+                    {
+                        // avoid yield return orig();
+                        if (IsOrig(yield.Expression, firstParam))
+                        {
+                            context.ReportDiagnostic(Diagnostic.Create(DontYieldReturnOrigRule, yield.GetLocation(), firstParam.Type.Name));
+                        }
+                    }
+                }
+
+                static bool IsOrig(SyntaxNode? st, IParameterSymbol orig)
+                {
+                    return st is InvocationExpressionSyntax invocationExpressionSyntax &&
+                           invocationExpressionSyntax.Expression.ToString() == orig.Name;
                 }
             }
 
-            var diagnostic = Diagnostic.Create(CallOrigInHooksRule, loc, firstParam.Type.Name);
-            context.ReportDiagnostic(diagnostic);
+            if (!origCalled)
+            {
+                var diagnostic = Diagnostic.Create(CallOrigInHooksRule, loc, firstParam.Type.Name);
+                context.ReportDiagnostic(diagnostic);
+            }
         }
     }
 }
